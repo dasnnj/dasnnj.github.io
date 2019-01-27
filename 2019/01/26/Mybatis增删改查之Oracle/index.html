@@ -46,21 +46,19 @@
 
 
 
-<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+<link rel="stylesheet" href="../lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
 
-<link rel="stylesheet" href="/css/main.css?v=6.7.0">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+<link rel="stylesheet" href="../css/main.css?v=6.7.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpeg?v=6.7.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/icon.jpeg?v=6.7.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpeg?v=6.7.0">
+
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/icon.jpeg?v=6.7.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+  <link rel="mask-icon" href="../images/logo.svg?v=6.7.0" color="#222">
 
 
 
@@ -96,18 +94,18 @@
 
 
 
-  <meta name="description" content="Mybatis增删改查之Oracle一. 查询 普通查询(返回普通的持久层对象,由于数据库字段风格和java不同,所以建立一个map映射)  1234567891011121314151617181920212223242526272829303132&amp;lt;resultMap type=&quot;com.xxx.domain.RuleCondition&quot; id=&quot;RuleConditionResultM">
+  <meta name="description" content="Mybatis增删改查之Oracle写在前面的话Mybatis的话一年没接触过了，这块有几个point需要注意：  返回对象resultMap的映射，以及resultMap嵌套（嵌套查询） jdbcType的参照，含义，用法 新增返回主键 批量新增，遇到指定字段重复则更新  没完成的是：批量新增返回主键List">
 <meta name="keywords" content="mybatis,oracle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis增删改查之Oracle">
 <meta property="og:url" content="/2019/01/26/Mybatis增删改查之Oracle/index.html">
 <meta property="og:site_name" content="life is love">
-<meta property="og:description" content="Mybatis增删改查之Oracle一. 查询 普通查询(返回普通的持久层对象,由于数据库字段风格和java不同,所以建立一个map映射)  1234567891011121314151617181920212223242526272829303132&amp;lt;resultMap type=&quot;com.xxx.domain.RuleCondition&quot; id=&quot;RuleConditionResultM">
+<meta property="og:description" content="Mybatis增删改查之Oracle写在前面的话Mybatis的话一年没接触过了，这块有几个point需要注意：  返回对象resultMap的映射，以及resultMap嵌套（嵌套查询） jdbcType的参照，含义，用法 新增返回主键 批量新增，遇到指定字段重复则更新  没完成的是：批量新增返回主键List">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-01-26T07:57:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mybatis增删改查之Oracle">
-<meta name="twitter:description" content="Mybatis增删改查之Oracle一. 查询 普通查询(返回普通的持久层对象,由于数据库字段风格和java不同,所以建立一个map映射)  1234567891011121314151617181920212223242526272829303132&amp;lt;resultMap type=&quot;com.xxx.domain.RuleCondition&quot; id=&quot;RuleConditionResultM">
+<meta name="twitter:description" content="Mybatis增删改查之Oracle写在前面的话Mybatis的话一年没接触过了，这块有几个point需要注意：  返回对象resultMap的映射，以及resultMap嵌套（嵌套查询） jdbcType的参照，含义，用法 新增返回主键 批量新增，遇到指定字段重复则更新  没完成的是：批量新增返回主键List">
 
 
 
@@ -223,8 +221,10 @@
     
 
     
+      
+    
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+    <a rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -240,8 +240,10 @@
     
 
     
+      
+    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+    <a rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
 
   </li>
         
@@ -257,8 +259,10 @@
     
 
     
+      
+    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+    <a rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">5</span></a>
 
   </li>
         
@@ -274,8 +278,10 @@
     
 
     
+      
+    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+    <a rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">2</span></a>
 
   </li>
         
@@ -291,8 +297,10 @@
     
 
     
+      
+    
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+    <a rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -373,12 +381,12 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="/2019/01/26/Mybatis增删改查之Oracle/">
+    <link itemprop="mainEntityOfPage" href="">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dasnnj">
       <meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible.">
-      <meta itemprop="image" content="/images/icon.jpeg">
+      <meta itemprop="image" content="../../../../images/icon.jpeg">
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
@@ -450,14 +458,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="../../../../categories/mybatis/" itemprop="url" rel="index"><span itemprop="name">mybatis</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/mybatis/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="../../../../categories/mybatis/oracle/" itemprop="url" rel="index"><span itemprop="name">oracle</span></a></span>
 
                 
                 
@@ -473,6 +481,13 @@
           
           
 
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
           
 
           
@@ -492,12 +507,21 @@
       
 
       
-        <h3 id="Mybatis增删改查之Oracle"><a href="#Mybatis增删改查之Oracle" class="headerlink" title="Mybatis增删改查之Oracle"></a>Mybatis增删改查之Oracle</h3><h5 id="一-查询"><a href="#一-查询" class="headerlink" title="一. 查询"></a>一. 查询</h5><ol>
+        <h3 id="Mybatis增删改查之Oracle"><a href="#Mybatis增删改查之Oracle" class="headerlink" title="Mybatis增删改查之Oracle"></a>Mybatis增删改查之Oracle</h3><h5 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h5><p>Mybatis的话一年没接触过了，这块有几个point需要注意：</p>
+<ul>
+<li>返回对象resultMap的映射，以及resultMap嵌套（嵌套查询）</li>
+<li>jdbcType的参照，含义，用法</li>
+<li>新增返回主键</li>
+<li>批量新增，遇到指定字段重复则更新</li>
+</ul>
+<p><strong>没完成的是</strong>：批量新增返回主键List</p>
+<a id="more"></a>
+<h5 id="一-查询"><a href="#一-查询" class="headerlink" title="一. 查询"></a>一. 查询</h5><ol>
 <li>普通查询(返回普通的持久层对象,由于数据库字段风格和java不同,所以建立一个map映射)</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.xxx.domain.RuleCondition"</span> <span class="attr">id</span>=<span class="string">"RuleConditionResultMapWithoutBondList"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"RC_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"ruleConditionId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_CAT1"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleCatOne"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_CAT2"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleCatTwo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RC_OPER_TYPE"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleOperateSymbol"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_REF"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleRef"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"START_EFFECT_TIME"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"effectTimeOfStart"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"END_EFFECT_TIME"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"effectTimeOfEnd"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BOND_CODE_1"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bondCodeOne"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BOND_CODE_2"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bondCodeTwo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BP_THRESHOLD"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"bpThreshold"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RC_STATUS"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleStatus"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"OPERATOR_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"operatorId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"LAST_UPDATED_DATE"</span> <span class="attr">jdbcType</span>=<span class="string">"DATE"</span> <span class="attr">property</span>=<span class="string">"lastUpdateTime"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span> </span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getRuleConditionWithoutBondListById"</span> <span class="attr">resultMap</span>=<span class="string">"RuleConditionResultMapWithoutBondList"</span>&gt;</span></span><br><span class="line">    select RC_ID,</span><br><span class="line">           RULE_CAT1,</span><br><span class="line">           RULE_CAT2,</span><br><span class="line">           RC_OPER_TYPE,</span><br><span class="line">           RULE_REF,</span><br><span class="line">           START_EFFECT_TIME,</span><br><span class="line">           END_EFFECT_TIME,</span><br><span class="line">           BOND_CODE_1,</span><br><span class="line">           BOND_CODE_2,</span><br><span class="line">           BP_THRESHOLD,</span><br><span class="line">           RC_STATUS,</span><br><span class="line">           LAST_UPDATED_DATE</span><br><span class="line">    FROM RULES_CONDITION</span><br><span class="line">    WHERE RC_ID = #&#123;ruleConditionId,jdbcType=NUMERIC&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <ol start="2">
-<li>带有自定义对象的查询(带了一个List)</li>
+<li>带有自定义对象的查询(带了一个List，嵌套查询)</li>
 </ol>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!--collection中的就是查询附带的list的函数</span></span><br><span class="line"><span class="comment">	property是java中list的属性名</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.xxx.domain.RuleCondition"</span> <span class="attr">id</span>=<span class="string">"RuleConditionResultMap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"RC_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"ruleConditionId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_CAT1"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleCatOne"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_CAT2"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleCatTwo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RC_OPER_TYPE"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleOperateSymbol"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RULE_REF"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleRef"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"START_EFFECT_TIME"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"effectTimeOfStart"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"END_EFFECT_TIME"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"effectTimeOfEnd"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BOND_CODE_1"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bondCodeOne"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BOND_CODE_2"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bondCodeTwo"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BP_THRESHOLD"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"bpThreshold"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"RC_STATUS"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ruleStatus"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"OPERATOR_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"operatorId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"LAST_UPDATED_DATE"</span> <span class="attr">jdbcType</span>=<span class="string">"DATE"</span> <span class="attr">property</span>=<span class="string">"lastUpdateTime"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">column</span>=<span class="string">"RC_ID"</span> <span class="attr">property</span>=<span class="string">"bondList"</span> <span class="attr">ofType</span>=<span class="string">"com.xxx.domain.RuleBond"</span></span></span><br><span class="line"><span class="tag">                <span class="attr">select</span>=<span class="string">"getBondListByRuleConditionId"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">type</span>=<span class="string">"com.xxx.domain.RuleBond"</span> <span class="attr">id</span>=<span class="string">"RuleBondResultMap"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"RB_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"ruleBondId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">column</span>=<span class="string">"RC_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"NUMERIC"</span> <span class="attr">property</span>=<span class="string">"ruleConditionId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BOND_CODE"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bondCode"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"SECURITY_TERM"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"term"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"BID_STRATEGY_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"bidStrategyId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"OFR_STRATEGY_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"ofrStrategyId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"STATUS"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"status"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"OPERATOR_ID"</span> <span class="attr">jdbcType</span>=<span class="string">"VARCHAR"</span> <span class="attr">property</span>=<span class="string">"operatorId"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">column</span>=<span class="string">"LAST_UPDATED_DATE"</span> <span class="attr">jdbcType</span>=<span class="string">"DATE"</span> <span class="attr">property</span>=<span class="string">"lastUpdateTime"</span>/&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--查询语句--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getRuleConditionBOsByEnumValue"</span> <span class="attr">resultMap</span>=<span class="string">"RuleConditionBOResultMap"</span>&gt;</span></span><br><span class="line">    select RC_ID,</span><br><span class="line">           RULE_CAT1,</span><br><span class="line">           RULE_CAT2,</span><br><span class="line">           RC_OPER_TYPE,</span><br><span class="line">           RULE_REF,</span><br><span class="line">           START_EFFECT_TIME,</span><br><span class="line">           END_EFFECT_TIME,</span><br><span class="line">           BOND_CODE_1,</span><br><span class="line">           BOND_CODE_2,</span><br><span class="line">           BP_THRESHOLD,</span><br><span class="line">           RC_STATUS,</span><br><span class="line">           LAST_UPDATED_DATE</span><br><span class="line">    FROM RULES_CONDITION</span><br><span class="line">    WHERE RULE_CAT1 = #&#123;enumValue,jdbcType=VARCHAR&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--附带List的查询语句--&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getBondListByRuleConditionId"</span> <span class="attr">resultMap</span>=<span class="string">"RuleBondResultMap"</span>&gt;</span></span><br><span class="line">    select RB_ID,</span><br><span class="line">           RC_ID,</span><br><span class="line">           t1.BOND_CODE,</span><br><span class="line">           t2.SECURITY_TERM,</span><br><span class="line">           BID_STRATEGY_ID,</span><br><span class="line">           OFR_STRATEGY_ID,</span><br><span class="line">           t1.STATUS,</span><br><span class="line">           t1.LAST_UPDATED_DATE</span><br><span class="line">    FROM RULES_BOND t1</span><br><span class="line">           left join BOND_BASIS_INFO t2 on t1.BOND_CODE = t2.BOND_CODE</span><br><span class="line">    WHERE RC_ID = #&#123;ruleConditionId,jdbcType=NUMERIC&#125;</span><br><span class="line">  <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h5 id="二-新增"><a href="#二-新增" class="headerlink" title="二. 新增"></a>二. 新增</h5><ol>
@@ -570,14 +594,14 @@
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.png" alt="Dasnnj 微信支付">
+        <img id="wechat_qr" src="../../../../images/wechatpay.png" alt="Dasnnj 微信支付">
         <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dasnnj 支付宝">
+        <img id="alipay_qr" src="../../../../images/alipay.jpg" alt="Dasnnj 支付宝">
         <p>支付宝</p>
       </div>
     
@@ -606,10 +630,10 @@
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
     
-    <a href="/2019/01/26/Mybatis增删改查之Oracle/" title="Mybatis增删改查之Oracle">/2019/01/26/Mybatis增删改查之Oracle/</a>
+    <a href="../../../../2019/01/26/Mybatis增删改查之Oracle/" title="Mybatis增删改查之Oracle">/2019/01/26/Mybatis增删改查之Oracle/</a>
   </li>
   <li class="post-copyright-license">
-    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
 </ul>
 
       </div>
@@ -619,9 +643,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/mybatis/" rel="tag"># mybatis</a>
+            <a href="../../../../tags/mybatis/" rel="tag"># mybatis</a>
           
-            <a href="/tags/oracle/" rel="tag"># oracle</a>
+            <a href="../../../../tags/oracle/" rel="tag"># oracle</a>
           
         </div>
       
@@ -634,15 +658,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/25/hello-world/" rel="next" title="Hello World">
-                <i class="fa fa-chevron-left"></i> Hello World
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="../将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程/" rel="prev" title="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">
+                将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -703,7 +727,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
-              <img class="site-author-image" itemprop="image" src="/images/icon.jpeg" alt="Dasnnj">
+              <img class="site-author-image" itemprop="image" src="../../../../images/icon.jpeg" alt="Dasnnj">
             
               <p class="site-author-name" itemprop="name">Dasnnj</p>
               <p class="site-description motion-element" itemprop="description">Nothing is impossible, the word itself says I'm possible.</p>
@@ -714,7 +738,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="../../../../archives/">
                 
                     <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">日志</span>
@@ -726,14 +750,18 @@
                 
                 
                 <div class="site-state-item site-state-categories">
-                  <a href="/categories/index.html">
+                  <a href="../../../../categories/index.html">
                     
                     
                       
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -743,14 +771,20 @@
                 
                 
                 <div class="site-state-item site-state-tags">
-                  <a href="/tags/index.html">
+                  <a href="../../../../tags/index.html">
                     
                     
                       
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -771,7 +805,7 @@
                   
                     
                   
-                  <a href="https://github.com/dasnnj" title="GitHub &rarr; https://github.com/dasnnj" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhc25uag==" title="GitHub &rarr; https://github.com/dasnnj"><i class="fa fa-fw fa-github"></i>GitHub</span>
                 </span>
               
                 <span class="links-of-author-item">
@@ -782,7 +816,7 @@
                   
                     
                   
-                  <a href="mailto:dasnnj@outlook.com" title="E-Mail &rarr; mailto:dasnnj@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  <span class="exturl" data-url="bWFpbHRvOmRhc25uakBvdXRsb29rLmNvbQ==" title="E-Mail &rarr; mailto:dasnnj@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
                 </span>
               
             </div>
@@ -812,7 +846,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis增删改查之Oracle"><span class="nav-number">1.</span> <span class="nav-text">Mybatis增删改查之Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#一-查询"><span class="nav-number">1.0.1.</span> <span class="nav-text">一. 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-新增"><span class="nav-number">1.0.2.</span> <span class="nav-text">二. 新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三-修改"><span class="nav-number">1.0.3.</span> <span class="nav-text">三. 修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四-删除"><span class="nav-number">1.0.4.</span> <span class="nav-text">四. 删除</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis增删改查之Oracle"><span class="nav-number">1.</span> <span class="nav-text">Mybatis增删改查之Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在前面的话"><span class="nav-number">1.0.1.</span> <span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一-查询"><span class="nav-number">1.0.2.</span> <span class="nav-text">一. 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-新增"><span class="nav-number">1.0.3.</span> <span class="nav-text">二. 新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三-修改"><span class="nav-number">1.0.4.</span> <span class="nav-text">三. 修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四-删除"><span class="nav-number">1.0.5.</span> <span class="nav-text">四. 删除</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -859,6 +893,32 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -914,43 +974,43 @@
 
 
   
-  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+  <script src="../../../../lib/jquery/index.js?v=2.1.3"></script>
 
   
-  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="../../../../lib/velocity/velocity.min.js?v=1.2.1"></script>
 
   
-  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-
-  
-
-
-  <script src="/js/src/utils.js?v=6.7.0"></script>
-
-  <script src="/js/src/motion.js?v=6.7.0"></script>
-
-
-
-  
-  
-
-
-  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
-
-
-
-
-  
-  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
-<script src="/js/src/post-details.js?v=6.7.0"></script>
-
+  <script src="../../../../lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
 
   
 
 
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+  <script src="../../../../js/src/utils.js?v=6.7.0"></script>
+
+  <script src="../../../../js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="../../../../js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="../../../../js/src/scrollspy.js?v=6.7.0"></script>
+<script src="../../../../js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="../../../../js/src/bootstrap.js?v=6.7.0"></script>
 
 
 
@@ -1291,6 +1351,21 @@
   
 
   
+  <script>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+      }
+      else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      }
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
 
   
 
@@ -1305,6 +1380,8 @@
   
 
   
+  <script src="../../../../js/src/exturl.js?v=6.7.0"></script>
+
 
   
 
