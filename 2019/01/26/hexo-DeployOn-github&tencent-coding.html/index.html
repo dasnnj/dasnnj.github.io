@@ -1,4 +1,1082 @@
-<!DOCTYPE html><html class="theme-next mist use-motion" lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=2"><meta name="theme-color" content="#222"><link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2"><meta name="baidu-site-verification" content="k7ArPlL7mM"><link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2"><link rel="stylesheet" href="/css/main.css?v=6.7.0"><link rel="apple-touch-icon" sizes="180x180" href="/images/icon.jpeg?v=6.7.0"><link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpeg?v=6.7.0"><link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222"><script id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Mist",version:"6.7.0",sidebar:{position:"left",display:"post",offset:12,b2t:!0,scrollpercent:!0,onmobile:!0},fancybox:!1,fastclick:!1,lazyload:!1,tabs:!0,motion:{enable:!0,async:!0,transition:{post_block:"swoopIn",post_header:"fadeIn",post_body:"fadeIn",coll_header:"slideLeftIn",sidebar:"fadeIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><script></script><meta name="description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了"><meta name="keywords" content="Hexo,github,coding"><meta property="og:type" content="article"><meta property="og:title" content="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程"><meta property="og:url" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/index.html"><meta property="og:site_name" content="life is love"><meta property="og:description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库.png"><meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库过程.png"><meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/删除库.png"><meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencent新建库.png"><meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencentPage服务.png"><meta property="og:updated_time" content="2019-01-27T14:17:57.000Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程"><meta name="twitter:description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了"><meta name="twitter:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库.png"><link rel="canonical" href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/"><script id="page.configurations">CONFIG.page={sidebar:""}</script><title>将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程 | life is love</title><script async src="//www.googletagmanager.com/gtag/js?id=UA-133339651-1"></script><script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-133339651-1")</script><noscript><style>.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.use-motion .logo-line-before i{left:initial}.use-motion .logo-line-after i{right:initial}</style></noscript></head><body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">life is love</span><span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description">记录生活和学习</h1></div><div class="site-nav-toggle"> <button aria-label="切换导航栏"><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/"><span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person"><meta itemprop="name" content="Dasnnj"><meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible."><meta itemprop="image" content="/images/icon.jpeg"></span><span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization"><meta itemprop="name" content="life is love"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2019-01-26 20:52:03 20:52:03" itemprop="dateCreated datePublished" datetime="2019-01-26T20:52:03+08:00">2019-01-26 20:52:03</time> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-calendar-check-o"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-01-27 22:17:57 22:17:57" itemprop="dateModified" datetime="2019-01-27T22:17:57+08:00">2019-01-27 22:17:57</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a></span> ， <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/tech/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span></span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i> 阅读次数：<span class="busuanzi-value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body" itemprop="articleBody"><h5 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h5><p>其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it!</p><p>嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有</p><p>还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了</p><a id="more"></a><h5 id="一-安装Hexo，初始化"><a href="#一-安装Hexo，初始化" class="headerlink" title="一. 安装Hexo，初始化"></a>一. 安装Hexo，初始化</h5><ol><li><code>npm install -g hexo</code>全局安装Hexo 创建一个文件夹如blog，不用进去（可以用<code>hexo -v</code>检验是否安装成功）</li><li><code>hexo init blog</code> 初始化这个blog和文件夹名字要一样，否则又创建个新的</li><li><code>npm install</code>安装所需要的依赖</li><li>后面就 <code>hexo s -g</code> 就是发布之前先生成静态文件 ，s:server，g:generate，访问下localhost:4000看ok不（不起作用，提示什么<code>hexo &lt;commands&gt;</code>什么东西了，就进到blog的目录下，使用hexo命令）</li><li>应该没有5了，如果上面没成功，那你去搜搜别人的初始化都怎么弄的，然后再回来看我剩下的实践</li></ol><h5 id="二-创建github公开库"><a href="#二-创建github公开库" class="headerlink" title="二. 创建github公开库"></a>二. 创建github公开库</h5><ol><li><p>有个point就是创建Repository的名字格式是 username.github.io，（看到有的博主只用的username就行，你可以尝试一下，不行的话删了就行）比如我的是 dasnnj.github.io，是为了能生成page服务</p><p><img src="新建库.png" alt=""></p></li><li><p>两步，输入Repository name，然后点击 create repository 按钮</p><p><img src="新建库过程.png" alt=""></p></li><li><p>建错删除的话，点进去新建的库，点击setting，点击最下面的删除，需要输入库的名字才能确认删除</p><p><img src="删除库.png" alt=""></p></li><li><p>没问题的话，还是要点进去setting，往下面滑动到GitHub Pages标题下面，照着那个链接点进去，不出意外就能直接访问到你的这个repository</p></li></ol><h5 id="三-创建腾讯云开发者平台（或Coding）公开库"><a href="#三-创建腾讯云开发者平台（或Coding）公开库" class="headerlink" title="三. 创建腾讯云开发者平台（或Coding）公开库"></a>三. 创建腾讯云开发者平台（或Coding）公开库</h5><ol><li><p>项目地址格式是 username.coding.me，格式不对会404哦，项目名称随便，确定就ok</p><p><img src="tencent新建库.png" alt=""></p></li><li><p>创建完记得进入代码浏览，初始化一下项目，添加一个readme文档就行了</p></li><li><p>进入page服务，然后开启</p><p><img src="tencentPage服务.png" alt=""></p></li></ol><h5 id="四-配置服务并将文件部署到Github"><a href="#四-配置服务并将文件部署到Github" class="headerlink" title="四. 配置服务并将文件部署到Github"></a>四. 配置服务并将文件部署到Github</h5><h5 id="五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><a href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）" class="headerlink" title="五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）"></a>五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</h5><ol><li><p>博客标题</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">life</span> <span class="string">is</span> <span class="string">love</span> <span class="comment"># 主标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">记录生活和学习</span> <span class="comment"># 副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">Nothing</span> <span class="string">is</span> <span class="string">impossible,</span> <span class="string">the</span> <span class="string">word</span> <span class="string">itself</span> <span class="string">says</span> <span class="string">I'm</span> <span class="string">possible.</span> <span class="comment"># 个人描述</span></span><br><span class="line"><span class="attr">keywords:</span> </span><br><span class="line"><span class="attr">author:</span> <span class="string">Dasnnj</span> <span class="comment"># 用户</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment"># 语言，不填默认英文</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span> <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure></li><li><p>url</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">/</span> <span class="comment">#这里如果你只部署了一个平台，那么填那个平台的地址，或者/都行，如果你部署在了两个平台上，那么就只写/吧</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> <span class="comment"># 链接格式https://newblog.dasnnj.cn/2019/01/26/标题名字/</span></span><br><span class="line"><span class="comment"># 也可设置为根据 category/:title/ 分类/标题名字  </span></span><br><span class="line"><span class="comment"># category/:title.html会在标题名字后面加上.html</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure></li><li><p>时间格式</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">date_format:</span> <span class="string">YYYY-MM-DD</span> <span class="attr">HH:mm:ss</span> </span><br><span class="line"><span class="attr">time_format:</span> <span class="attr">HH:mm:ss</span></span><br></pre></td></tr></table></figure><p>这里给date加上小时分钟等，是为了解决新建页面，发表时间只显示日期没有时间</p></li><li><p>其他</p><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Directory   </span></span><br><span class="line"><span class="attr">source_dir:</span> <span class="string">source</span>   <span class="comment">#资源文件夹，这个文件夹用来存放内容</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">public</span>     <span class="comment">#公共文件夹，这个文件夹用于存放生成的站点文件。</span></span><br><span class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span>         <span class="comment"># 标签文件夹     </span></span><br><span class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span>    <span class="comment">#归档文件夹</span></span><br><span class="line"><span class="attr">category_dir:</span> <span class="string">categories</span>      <span class="comment">#分类文件夹</span></span><br><span class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span>     <span class="comment">#Include code 文件夹</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span>                <span class="comment">#国际化（i18n）文件夹</span></span><br><span class="line"><span class="attr">skip_render:</span>                <span class="comment">#跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。    </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:title.md</span> <span class="comment"># 新文章的文件名称</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span>     <span class="comment">#预设布局</span></span><br><span class="line"><span class="attr">titlecase:</span> <span class="literal">false</span> <span class="comment"># 把标题转换为 title case</span></span><br><span class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># 在新标签中打开链接</span></span><br><span class="line"><span class="attr">filename_case:</span> <span class="number">0</span>     <span class="comment">#把文件名称转换为 (1) 小写或 (2) 大写</span></span><br><span class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span>  <span class="comment">#是否显示草稿</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">false</span>  <span class="comment">#是否启动 Asset 文件夹</span></span><br><span class="line"><span class="attr">relative_link:</span> <span class="literal">false</span>      <span class="comment">#把链接改为与根目录的相对位址    </span></span><br><span class="line"><span class="attr">future:</span> <span class="literal">true</span>                <span class="comment">#显示未来的文章</span></span><br><span class="line"><span class="attr">highlight:</span>                    <span class="comment">#内容中代码块的设置    </span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  line_number:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  auto_detect:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  tab_replace:</span></span><br></pre></td></tr></table></figure></li><li><p>新建文章模板的key对应的含义</p><p><code>属性 描述</code></p><p><code>title 标题</code></p><p><code>slug 网址</code></p><p><code>layout 布局。默认为 default_layout 参数。</code></p><p><code>path 路径。默认会根据 new_post_path 参数创建文章路径。</code></p><p><code>date 日期。默认为当前时间。</code></p><p>我这篇文章的信息</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程</span><br><span class="line">date: 2019-01-26 20:52:03</span><br><span class="line">tags: [Hexo,github,coding] # 标签</span><br><span class="line">categories:</span><br><span class="line">	- tech # 分类</span><br><span class="line">	- Hexo # tech的子分类</span><br></pre></td></tr></table></figure></li></ol><h5 id="持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"><a href="#持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）" class="headerlink" title="持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"></a>持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）</h5><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8xN2Q1NWQ0MjBkOTQ=" title="https://www.jianshu.com/p/17d55d420d94">hexo的目录结构 - 一直玩编程<i class="fa fa-external-link"></i></span></p><p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2FwaQ==" title="https://hexo.io/zh-cn/api">官方文档<i class="fa fa-external-link"></i></span></p></div><div><div><div style="text-align:center;color:#ccc;font-size:14px">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div></div></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div>坚持原创技术分享，您的支持将鼓励我继续创作！</div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>打赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="/images/wechatpay.png" alt="Dasnnj 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="/images/alipay.jpg" alt="Dasnnj 支付宝"><p>支付宝</p></div></div></div></div><div><ul class="post-copyright"><li class="post-copyright-author"> <strong>本文作者：</strong> Dasnnj</li><li class="post-copyright-link"> <strong>本文链接：</strong> <a href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/" title="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">/2019/01/26/hexo-DeployOn-github&tencent-coding.html/</a></li><li class="post-copyright-license"> <strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用<span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i> BY-NC-SA</span> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a><a href="/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a><a href="/tags/coding/" rel="tag"><i class="fa fa-tag"></i> coding</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2019/01/26/Mybatis增删改查之Oracle.html/" rel="next" title="Mybatis增删改查之Oracle"><i class="fa fa-chevron-left"></i> Mybatis增删改查之Oracle</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"></div></div></footer></div></article></div></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span><span class="sidebar-toggle-line sidebar-toggle-line-middle"></span><span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div id="sidebar-dimmer"></div><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap"> 文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap"> 站点概览</li></ul><div class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="/images/icon.jpeg" alt="Dasnnj"><p class="site-author-name" itemprop="name">Dasnnj</p><p class="site-description motion-element" itemprop="description">Nothing is impossible, the word itself says I'm possible.</p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">2</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">4</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">5</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author motion-element"><span class="links-of-author-item"><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhc25uag==" title="GitHub &rarr; https://github.com/dasnnj"><i class="fa fa-fw fa-github"></i> GitHub</span></span><span class="links-of-author-item"><span class="exturl" data-url="bWFpbHRvOmRhc25uakBvdXRsb29rLmNvbQ==" title="E-Mail &rarr; mailto:dasnnj@outlook.com"><i class="fa fa-fw fa-envelope"></i> E-Mail</span></span></div></div></div><div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在前面的话"><span class="nav-number">1.</span> <span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一-安装Hexo，初始化"><span class="nav-number">2.</span> <span class="nav-text">一. 安装Hexo，初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-创建github公开库"><span class="nav-number">3.</span> <span class="nav-text">二. 创建github公开库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三-创建腾讯云开发者平台（或Coding）公开库"><span class="nav-number">4.</span> <span class="nav-text">三. 创建腾讯云开发者平台（或Coding）公开库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四-配置服务并将文件部署到Github"><span class="nav-number">5.</span> <span class="nav-text">四. 配置服务并将文件部署到Github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><span class="nav-number">6.</span> <span class="nav-text">五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"><span class="nav-number">7.</span> <span class="nav-text">持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div></div></div><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright"> <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备 18036569号</span> &copy; <span itemprop="copyrightYear">2019</span><span class="with-love" id="animate"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">Dasnnj</span></div><div class="busuanzi-count"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span class="post-meta-item-icon"><i class="fa fa-user"></i></span><span class="site-uv" title="总访客量"><span class="busuanzi-value" id="busuanzi_value_site_uv"></span></span> <span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="site-pv" title="总访问量"><span class="busuanzi-value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div id="needsharebutton-float"><span class="btn"><i class="fa fa-share-alt" aria-hidden="true"></i></span></div></div><script>"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script src="/lib/jquery/index.js?v=2.1.3"></script><script src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script src="/js/src/utils.js?v=6.7.0"></script><script src="/js/src/motion.js?v=6.7.0"></script><script src="/js/src/schemes/muse.js?v=6.7.0"></script><script src="/js/src/scrollspy.js?v=6.7.0"></script><script src="/js/src/post-details.js?v=6.7.0"></script><script src="/js/src/bootstrap.js?v=6.7.0"></script><script>
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <meta name="baidu-site-verification" content="k7ArPlL7mM">
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/icon.jpeg?v=6.7.0">
+
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpeg?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"swoopIn","post_header":"fadeIn","post_body":"fadeIn","coll_header":"slideLeftIn","sidebar":"fadeIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+  
+
+
+
+
+  <meta name="description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了">
+<meta name="keywords" content="Hexo,github,coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">
+<meta property="og:url" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/index.html">
+<meta property="og:site_name" content="life is love">
+<meta property="og:description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库.png">
+<meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库过程.png">
+<meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/删除库.png">
+<meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencent新建库.png">
+<meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencentPage服务.png">
+<meta property="og:updated_time" content="2019-01-27T14:17:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">
+<meta name="twitter:description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了">
+<meta name="twitter:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/新建库.png">
+
+
+
+
+
+
+  <link rel="canonical" href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程 | life is love</title>
+  
+
+
+
+
+  <script async src="//www.googletagmanager.com/gtag/js?id=UA-133339651-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-133339651-1');
+  </script>
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">life is love</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <h1 class="site-subtitle" itemprop="description">记录生活和学习</h1>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dasnnj">
+      <meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible.">
+      <meta itemprop="image" content="/images/icon.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="life is love">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程
+
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-01-26 20:52:03 20:52:03" itemprop="dateCreated datePublished" datetime="2019-01-26T20:52:03+08:00">2019-01-26 20:52:03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-27 22:17:57 22:17:57" itemprop="dateModified" datetime="2019-01-27T22:17:57+08:00">2019-01-27 22:17:57</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/tech/" itemprop="url" rel="index"><span itemprop="name">tech</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/tech/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="写在前面的话"><a href="#写在前面的话" class="headerlink" title="写在前面的话"></a>写在前面的话</h5><p>其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it!</p>
+<p>嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有</p>
+<p>还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了</p>
+<a id="more"></a>
+<h5 id="一-安装Hexo，初始化"><a href="#一-安装Hexo，初始化" class="headerlink" title="一. 安装Hexo，初始化"></a>一. 安装Hexo，初始化</h5><ol>
+<li><code>npm install -g hexo</code>全局安装Hexo 创建一个文件夹如blog，不用进去（可以用<code>hexo -v</code>检验是否安装成功）</li>
+<li><code>hexo init blog</code> 初始化这个blog和文件夹名字要一样，否则又创建个新的</li>
+<li><code>npm install</code>安装所需要的依赖</li>
+<li>后面就 <code>hexo s -g</code> 就是发布之前先生成静态文件 ，s:server，g:generate，访问下localhost:4000看ok不（不起作用，提示什么<code>hexo &lt;commands&gt;</code>什么东西了，就进到blog的目录下，使用hexo命令）</li>
+<li>应该没有5了，如果上面没成功，那你去搜搜别人的初始化都怎么弄的，然后再回来看我剩下的实践</li>
+</ol>
+<h5 id="二-创建github公开库"><a href="#二-创建github公开库" class="headerlink" title="二. 创建github公开库"></a>二. 创建github公开库</h5><ol>
+<li><p>有个point就是创建Repository的名字格式是  username.github.io，（看到有的博主只用的username就行，你可以尝试一下，不行的话删了就行）比如我的是 dasnnj.github.io，是为了能生成page服务</p>
+<p><img src="新建库.png" alt=""></p>
+</li>
+<li><p>两步，输入Repository name，然后点击 create repository 按钮</p>
+<p><img src="新建库过程.png" alt=""></p>
+</li>
+<li><p>建错删除的话，点进去新建的库，点击setting，点击最下面的删除，需要输入库的名字才能确认删除</p>
+<p><img src="删除库.png" alt=""></p>
+</li>
+<li><p>没问题的话，还是要点进去setting，往下面滑动到GitHub Pages标题下面，照着那个链接点进去，不出意外就能直接访问到你的这个repository</p>
+</li>
+</ol>
+<h5 id="三-创建腾讯云开发者平台（或Coding）公开库"><a href="#三-创建腾讯云开发者平台（或Coding）公开库" class="headerlink" title="三. 创建腾讯云开发者平台（或Coding）公开库"></a>三. 创建腾讯云开发者平台（或Coding）公开库</h5><ol>
+<li><p>项目地址格式是 username.coding.me，格式不对会404哦，项目名称随便，确定就ok</p>
+<p><img src="tencent新建库.png" alt=""></p>
+</li>
+<li><p>创建完记得进入代码浏览，初始化一下项目，添加一个readme文档就行了</p>
+</li>
+<li><p>进入page服务，然后开启</p>
+<p><img src="tencentPage服务.png" alt=""></p>
+</li>
+</ol>
+<h5 id="四-配置服务并将文件部署到Github"><a href="#四-配置服务并将文件部署到Github" class="headerlink" title="四. 配置服务并将文件部署到Github"></a>四. 配置服务并将文件部署到Github</h5><h5 id="五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><a href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）" class="headerlink" title="五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）"></a>五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</h5><ol>
+<li><p>博客标题</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">life</span> <span class="string">is</span> <span class="string">love</span> <span class="comment"># 主标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">记录生活和学习</span> <span class="comment"># 副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">Nothing</span> <span class="string">is</span> <span class="string">impossible,</span> <span class="string">the</span> <span class="string">word</span> <span class="string">itself</span> <span class="string">says</span> <span class="string">I'm</span> <span class="string">possible.</span> <span class="comment"># 个人描述</span></span><br><span class="line"><span class="attr">keywords:</span> </span><br><span class="line"><span class="attr">author:</span> <span class="string">Dasnnj</span> <span class="comment"># 用户</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment"># 语言，不填默认英文</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span> <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>url</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">url:</span> <span class="string">/</span> <span class="comment">#这里如果你只部署了一个平台，那么填那个平台的地址，或者/都行，如果你部署在了两个平台上，那么就只写/吧</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">:year/:month/:day/:title/</span> <span class="comment"># 链接格式https://newblog.dasnnj.cn/2019/01/26/标题名字/</span></span><br><span class="line"><span class="comment"># 也可设置为根据 category/:title/ 分类/标题名字  </span></span><br><span class="line"><span class="comment"># category/:title.html会在标题名字后面加上.html</span></span><br><span class="line"><span class="attr">permalink_defaults:</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>时间格式</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">date_format:</span> <span class="string">YYYY-MM-DD</span> <span class="attr">HH:mm:ss</span> </span><br><span class="line"><span class="attr">time_format:</span> <span class="attr">HH:mm:ss</span></span><br></pre></td></tr></table></figure>
+<p>这里给date加上小时分钟等，是为了解决新建页面，发表时间只显示日期没有时间</p>
+</li>
+<li><p>其他</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Directory   </span></span><br><span class="line"><span class="attr">source_dir:</span> <span class="string">source</span>   <span class="comment">#资源文件夹，这个文件夹用来存放内容</span></span><br><span class="line"><span class="attr">public_dir:</span> <span class="string">public</span>     <span class="comment">#公共文件夹，这个文件夹用于存放生成的站点文件。</span></span><br><span class="line"><span class="attr">tag_dir:</span> <span class="string">tags</span>         <span class="comment"># 标签文件夹     </span></span><br><span class="line"><span class="attr">archive_dir:</span> <span class="string">archives</span>    <span class="comment">#归档文件夹</span></span><br><span class="line"><span class="attr">category_dir:</span> <span class="string">categories</span>      <span class="comment">#分类文件夹</span></span><br><span class="line"><span class="attr">code_dir:</span> <span class="string">downloads/code</span>     <span class="comment">#Include code 文件夹</span></span><br><span class="line"><span class="attr">i18n_dir:</span> <span class="string">:lang</span>                <span class="comment">#国际化（i18n）文件夹</span></span><br><span class="line"><span class="attr">skip_render:</span>                <span class="comment">#跳过指定文件的渲染，您可使用 glob 表达式来匹配路径。    </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">new_post_name:</span> <span class="string">:title.md</span> <span class="comment"># 新文章的文件名称</span></span><br><span class="line"><span class="attr">default_layout:</span> <span class="string">post</span>     <span class="comment">#预设布局</span></span><br><span class="line"><span class="attr">titlecase:</span> <span class="literal">false</span> <span class="comment"># 把标题转换为 title case</span></span><br><span class="line"><span class="attr">external_link:</span> <span class="literal">true</span> <span class="comment"># 在新标签中打开链接</span></span><br><span class="line"><span class="attr">filename_case:</span> <span class="number">0</span>     <span class="comment">#把文件名称转换为 (1) 小写或 (2) 大写</span></span><br><span class="line"><span class="attr">render_drafts:</span> <span class="literal">false</span>  <span class="comment">#是否显示草稿</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">false</span>  <span class="comment">#是否启动 Asset 文件夹</span></span><br><span class="line"><span class="attr">relative_link:</span> <span class="literal">false</span>      <span class="comment">#把链接改为与根目录的相对位址    </span></span><br><span class="line"><span class="attr">future:</span> <span class="literal">true</span>                <span class="comment">#显示未来的文章</span></span><br><span class="line"><span class="attr">highlight:</span>                    <span class="comment">#内容中代码块的设置    </span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  line_number:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  auto_detect:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">  tab_replace:</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建文章模板的key对应的含义</p>
+<p><code>属性    描述</code></p>
+<p><code>title      标题</code></p>
+<p><code>slug      网址</code></p>
+<p><code>layout    布局。默认为 default_layout 参数。</code></p>
+<p><code>path    路径。默认会根据 new_post_path 参数创建文章路径。</code></p>
+<p><code>date    日期。默认为当前时间。</code></p>
+<p>我这篇文章的信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">title: 将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程</span><br><span class="line">date: 2019-01-26 20:52:03</span><br><span class="line">tags: [Hexo,github,coding] # 标签</span><br><span class="line">categories:</span><br><span class="line">	- tech # 分类</span><br><span class="line">	- Hexo # tech的子分类</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h5 id="持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"><a href="#持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）" class="headerlink" title="持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"></a>持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）</h5><h5 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h5><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuamlhbnNodS5jb20vcC8xN2Q1NWQ0MjBkOTQ=" title="https://www.jianshu.com/p/17d55d420d94">hexo的目录结构 - 一直玩编程<i class="fa fa-external-link"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlvL3poLWNuL2FwaQ==" title="https://hexo.io/zh-cn/api">官方文档<i class="fa fa-external-link"></i></span></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+    <div>
+      
+      <div>
+
+    <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+
+</div>
+
+      
+    </div>
+    
+
+    
+      
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Dasnnj 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Dasnnj 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Dasnnj</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/" title="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">/2019/01/26/hexo-DeployOn-github&tencent-coding.html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC8="><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+          
+            <a href="/tags/github/" rel="tag"><i class="fa fa-tag"></i> github</a>
+          
+            <a href="/tags/coding/" rel="tag"><i class="fa fa-tag"></i> coding</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/26/Mybatis增删改查之Oracle.html/" rel="next" title="Mybatis增删改查之Oracle">
+                <i class="fa fa-chevron-left"></i> Mybatis增删改查之Oracle
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/icon.jpeg" alt="Dasnnj">
+            
+              <p class="site-author-name" itemprop="name">Dasnnj</p>
+              <p class="site-description motion-element" itemprop="description">Nothing is impossible, the word itself says I'm possible.</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2Rhc25uag==" title="GitHub &rarr; https://github.com/dasnnj"><i class="fa fa-fw fa-github"></i>GitHub</span>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <span class="exturl" data-url="bWFpbHRvOmRhc25uakBvdXRsb29rLmNvbQ==" title="E-Mail &rarr; mailto:dasnnj@outlook.com"><i class="fa fa-fw fa-envelope"></i>E-Mail</span>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#写在前面的话"><span class="nav-number">1.</span> <span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#一-安装Hexo，初始化"><span class="nav-number">2.</span> <span class="nav-text">一. 安装Hexo，初始化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#二-创建github公开库"><span class="nav-number">3.</span> <span class="nav-text">二. 创建github公开库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#三-创建腾讯云开发者平台（或Coding）公开库"><span class="nav-number">4.</span> <span class="nav-text">三. 创建腾讯云开发者平台（或Coding）公开库</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#四-配置服务并将文件部署到Github"><span class="nav-number">5.</span> <span class="nav-text">四. 配置服务并将文件部署到Github</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><span class="nav-number">6.</span> <span class="nav-text">五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）"><span class="nav-number">7.</span> <span class="nav-text">持续更新，下面大概要写我的next主题的一些配置，没有网上的大佬那样很全，但是对我来说很足够了（可能是版本不同，网上大佬的有部分可能不适用现在的，我这边会给出我的解决方法）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参考"><span class="nav-number">8.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">  <span class="exturl" data-url="aHR0cDovL3d3dy5taWl0YmVpYW4uZ292LmNu">豫ICP备 18036569号 </span>&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dasnnj</span>
+
+  
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+  
+
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+      <div id="needsharebutton-float">
+        <span class="btn">
+          <i class="fa fa-share-alt" aria-hidden="true"></i>
+        </span>
+      </div>
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/schemes/muse.js?v=6.7.0"></script>
+
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+  <script>
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -316,4 +1394,136 @@
         onPopupClose();
       }
     });
-  </script><script src="/lib/needsharebutton/needsharebutton.js"></script><script>flOptions={iconStyle:"default",boxForm:"vertical",position:"middleRight",networks:"Wechat,QQZone,Douban,Twitter,Weibo,Facebook,GooglePlus,GoogleBookmarks,Evernote"},new needShareButton("#needsharebutton-float",flOptions)</script><script src="/js/src/exturl.js?v=6.7.0"></script><style>.copy-btn{display:inline-block;padding:6px 12px;font-size:13px;font-weight:700;line-height:20px;color:#333;white-space:nowrap;vertical-align:middle;cursor:pointer;background-color:#eee;background-image:linear-gradient(#fcfcfc,#eee);border:1px solid #d5d5d5;border-radius:3px;user-select:none;outline:0}.highlight-wrap .copy-btn{transition:opacity .3s ease-in-out;opacity:0;padding:2px 6px;position:absolute;right:4px;top:8px}.highlight-wrap .copy-btn:focus,.highlight-wrap:hover .copy-btn{opacity:1}.highlight-wrap{position:relative}</style><script>$(".highlight").each(function(e,t){var n=$("<div>").addClass("highlight-wrap");$(t).after(n),n.append($("<button>").addClass("copy-btn").append("复制").on("click",function(e){var t=$(this).parent().find(".code").find(".line").map(function(e,t){return $(t).text()}).toArray().join("\n"),n=document.createElement("textarea"),o=document.createRange(),a=window.getSelection(),i=window.pageYOffset||document.documentElement.scrollTop;n.style.top=i+"px",n.style.position="absolute",n.style.opacity="0",n.value=t,n.textContent=t,n.contentEditable=!0,n.readOnly=!1,document.body.appendChild(n),o.selectNode(n),a.removeAllRanges(),a.addRange(o),n.setSelectionRange(0,t.length),document.execCommand("copy")?$(this).text("复制成功"):$(this).text("复制失败"),n.blur(),$(this).blur()})).on("mouseleave",function(e){var t=$(this).find(".copy-btn");setTimeout(function(){t.text("复制")},300)}).append(t)})</script></body></html>
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+  <script>
+    
+    
+      flOptions = {};
+      
+        flOptions.iconStyle = "default";
+      
+        flOptions.boxForm = "vertical";
+      
+        flOptions.position = "middleRight";
+      
+        flOptions.networks = "Wechat,QQZone,Douban,Twitter,Weibo,Facebook,GooglePlus,GoogleBookmarks,Evernote";
+      
+      new needShareButton('#needsharebutton-float', flOptions);
+    
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+  <script src="/js/src/exturl.js?v=6.7.0"></script>
+
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function(i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap');
+      $(e).after($wrap);
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function(e) {
+        var code = $(this).parent().find('.code').find('.line').map(function(i, e) {
+          return $(e).text();
+        }).toArray().join('\n');
+        var ta = document.createElement('textarea');
+        var range = document.createRange(); //For Chrome
+        var sel = window.getSelection(); //For Chrome
+        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
+        ta.style.top = yPosition + 'px'; //Prevent page scroll
+        ta.style.position = 'absolute';
+        ta.style.opacity = '0';
+        ta.value = code;
+        ta.textContent = code; //For FireFox
+        ta.contentEditable = true;
+        ta.readOnly = false;
+        document.body.appendChild(ta);
+        range.selectNode(ta);
+        sel.removeAllRanges();
+        sel.addRange(range);
+        ta.setSelectionRange(0, code.length);
+        var result = document.execCommand('copy');
+        
+          if (result) $(this).text('复制成功');
+          else $(this).text('复制失败');
+        
+        ta.blur(); //For iOS
+        $(this).blur();
+      })).on('mouseleave', function(e) {
+        var $b = $(this).find('.copy-btn');
+        setTimeout(function() {
+          $b.text('复制');
+        }, 300);
+      }).append(e);
+    })
+  </script>
+
+
+  
+
+</body>
+</html>
