@@ -129,7 +129,7 @@
 <meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/删除库.png">
 <meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencent新建库.png">
 <meta property="og:image" content="/2019/01/26/hexo-DeployOn-github&tencent-coding.html/tencentPage服务.png">
-<meta property="og:updated_time" content="2019-01-27T14:17:57.000Z">
+<meta property="og:updated_time" content="2019-02-21T13:50:13.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">
 <meta name="twitter:description" content="写在前面的话其实我也是这两天才接触到Hexo，之前是用的wordpress在阿里云上挂着。觉得Hexo好像更符合现在我的审美，so, do it! 嗯前面安装git和node.js我这边就省略掉了。作为一个爱搞事的，这些东西电脑上都有 还有就是我照着网上的教程是没问题，但是走到一些页面的小功能的时候，就不起作用了，可能是版本更新不兼容了">
@@ -467,7 +467,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-01-27 22:17:57 22:17:57" itemprop="dateModified" datetime="2019-01-27T22:17:57+08:00">2019-01-27 22:17:57</time>
+                <time title="修改时间：2019-02-21 21:50:13 21:50:13" itemprop="dateModified" datetime="2019-02-21T21:50:13+08:00">2019-02-21 21:50:13</time>
               
             
           </span>
@@ -567,7 +567,20 @@
 <p><img src="tencentPage服务.png" alt=""></p>
 </li>
 </ol>
-<h5 id="四-配置服务并将文件部署到Github"><a href="#四-配置服务并将文件部署到Github" class="headerlink" title="四. 配置服务并将文件部署到Github"></a>四. 配置服务并将文件部署到Github</h5><h5 id="五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><a href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）" class="headerlink" title="五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）"></a>五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</h5><ol>
+<h5 id="四-配置服务并将文件部署到Github"><a href="#四-配置服务并将文件部署到Github" class="headerlink" title="四. 配置服务并将文件部署到Github"></a>四. 配置服务并将文件部署到Github</h5><ol>
+<li><p>复制上面创建的两个库的git地址</p>
+</li>
+<li><p>修改最下面的deploy，格式类似我这样的</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/deployment.html</span></span><br><span class="line"><span class="attr">deploy:</span> </span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> </span><br><span class="line"><span class="attr">    github:</span> <span class="attr">https://github.com/dasnnj/dasnnj.github.io.git,master</span></span><br><span class="line"><span class="attr">    coding:</span> <span class="attr">https://git.dev.tencent.com/dasnnj/dasnnj.coding.me.git,master</span> <span class="comment"># 腾讯</span></span><br><span class="line">    <span class="comment"># coding:  https://git.coding.net/dasnnj/dasnnj.coding.me.git,master # Coding</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>执行<code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo s</code> 清除缓存，生成静态文件，本地发布</li>
+<li>页面上没问题的话，就可以执行<code>hexo d</code></li>
+<li>会弹出输入github账号密码，和腾讯开发者平台的账号密码。后面通过生成ssh私钥，公钥就不用频繁输入用户名密码,参考<a href="/generateSshKeyWithGit">windows生成git公钥</a></li>
+<li>部署成功，按照各自平台的pages服务提示的网址即可访问</li>
+</ol>
+</li>
+</ol>
+<h5 id="五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）"><a href="#五-其他配置（目前都是关于博客根目录下面的-config-yaml的修改）" class="headerlink" title="五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）"></a>五. 其他配置（目前都是关于博客根目录下面的_config.yaml的修改）</h5><ol>
 <li><p>博客标题</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">life</span> <span class="string">is</span> <span class="string">love</span> <span class="comment"># 主标题</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">记录生活和学习</span> <span class="comment"># 副标题</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">Nothing</span> <span class="string">is</span> <span class="string">impossible,</span> <span class="string">the</span> <span class="string">word</span> <span class="string">itself</span> <span class="string">says</span> <span class="string">I'm</span> <span class="string">possible.</span> <span class="comment"># 个人描述</span></span><br><span class="line"><span class="attr">keywords:</span> </span><br><span class="line"><span class="attr">author:</span> <span class="string">Dasnnj</span> <span class="comment"># 用户</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">zh-CN</span> <span class="comment"># 语言，不填默认英文</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">Asia/Shanghai</span> <span class="comment"># 时区</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -600,6 +613,18 @@
 
     
       
+
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+  
+    <li class="popular-posts-item">
+      
+      
+      <div class="popular-posts-title"><a href="\2019\02\21\generateSshKeyWithGit.html\" rel="bookmark">git生成ssh 公钥-windows</a></div>
+      
+    </li>
+  
+  </ul>
 
 
     
@@ -709,6 +734,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2019/02/21/generateSshKeyWithGit.html/" rel="prev" title="git生成ssh 公钥-windows">
+                git生成ssh 公钥-windows <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -781,7 +810,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -806,7 +835,13 @@
                     
                       
                     
-                    <span class="site-state-item-count">6</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -833,7 +868,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
