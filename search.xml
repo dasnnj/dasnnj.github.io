@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[前端通过后端传过来的' ',''等字符串换行失败问题]]></title>
+    <url>%2F2019%2F04%2F19%2Fnewline-with-str-from-backend.html%2F</url>
+    <content type="text"><![CDATA[后台推送换行符”\n”或”“等字符串到前台不会换行详细描述后台逻辑处理返回String字符串，其中包含\n或&lt;br/&gt;等换行符号，但是前端渲染时候却并没有真正的换行也尝试了大佬的各种 \r\n,&lt;br/&gt;,&amp;lt;br/&amp;gt;等都没有作用解决方案下面的解决方案来自https://www.jianshu.com/p/1d0ec501b318前台用的vue+iview这是我表格中的一列，推送过来字符串包含换行符\n，增加class:&#39;comment&#39;类选择器1234567891011121314151617181920212223&#123; title: '备注', align: 'left', key: 'COMMENT', render: (h, params) =&gt; &#123; if(params.row.COMMENT == "") &#123; return h('span', '--'); &#125;else&#123; return h('span',&#123; class:'comment' &#125;,params.row.COMMENT) &#125; &#125; &#125;``` &lt;!-- more --&gt; ![](https://oneshare.dasnnj.cn/blogs/newblog/2019/04/newline_with_str_from_backend1.png) 后面增加下面的CSS，就可以利用后台推送的`\n`来换行了 ```CSS.comment&#123; white-space:pre-wrap;&#125;]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[SVN Update Error 解决方案]]></title>
+    <url>%2F2019%2F04%2F19%2Fsvn-update-error.html%2F</url>
+    <content type="text"><![CDATA[SVN Update Error Please execute the ‘Cleanup’ command 解决方案详细描述使用SVN更新文件时，会碰到失败的情况（可能因为上次拉取被强制中断等操作），提示需要cleanup ,但是你clean up时又提示文件夹已经locked，这时候你又去release lock，但是还是失败，提示 Please execute the &#39;Cleanup&#39; command.（TMD真难用）解决方案显然这个无法操作因为是svn文件被锁需要释放，但是手动释放又行不通，so需要进入被锁定文件夹所在的svn根目录，然后将隐藏文件设置为可见找到.svn文件夹，用数据库管理工具如navicat,datagrip等ide链接wc.db，这是一个sqlite数据库，找到WC_LOCK表进去将被锁定的记录删除掉并提交更新到数据库。再去更新代码或文件时候就ok了​​]]></content>
+      <categories>
+        <category>svn</category>
+      </categories>
+      <tags>
+        <tag>svn</tag>
+        <tag>cleanup</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Oracle分组查询]]></title>
     <url>%2F2019%2F04%2F06%2Fgrouping-query-in-oracle.html%2F</url>
     <content type="text"><![CDATA[分组查询，且只取每一组内的一条最新的记录需求：查询 code 为a，b，c且在有效时间段内的每个code最新的一条记录（code不是主键）12345678910select * from (select code col1, col2, row_number() over (partition by code order by time desc) rank from t_order where type= '107' and to_char(sysdate, 'yyyymmdd-hh24:mi:ss') &amp;lt;= validuntilTime and code in ('a','b','c') ) where rank = 1其中下面代码含义是将时间在有效时间段内（to_char(sysdate, &#39;yyyymmdd-hh24:mi:ss&#39;) &amp;lt;= validuntilTime）且code为a，或b，或c（code in(&#39;a&#39;,&#39;b&#39;,&#39;c&#39;)）的所有记录根据code分组(partition by code），且组内的顺序是根据时间的逆序排列（order by time desc）12345678910(select code col1, col2, row_number() over (partition by code order by time desc) rank from t_order where type= '107' and to_char(sysdate, 'yyyymmdd-hh24:mi:ss') &amp;lt;= validuntilTime and code in ('a','b','c') )上面执行结果是类似下面表格效果CODECOL1COL2RANKaxxxxxx1axxxxxx2axxxxxx3bxxxxxx1bxxxxxx2cxxxxxx1cxxxxxx2cxxxxxx3cxxxxxx4然后将其作为子查询，在外层套一个select * from (上面的代码) where rank = 1就能将每一组内的一条最新的记录查询出来了]]></content>
@@ -61,8 +81,8 @@
         <category>oracle</category>
       </categories>
       <tags>
-        <tag>mybatis</tag>
         <tag>oracle</tag>
+        <tag>mybatis</tag>
       </tags>
   </entry>
   <entry>
