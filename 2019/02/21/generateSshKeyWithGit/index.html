@@ -1,1 +1,344 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0"><link rel="apple-touch-icon" sizes="180x180" href="/icon.jpeg"><link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpeg"><link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpeg"><link rel="mask-icon" href="/icon.jpeg" color="#222"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous"><script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script><meta name="description" content="首先可以查看是否已经有了config（当然有了也可以覆盖掉） 可以通过git config user.name  （email类似） 如过没有设置git config信息的话先设置用户名和邮箱，通过git config user.name “用户名”  和 git config user.email “邮箱” （以上设置的是局部信息，设置全局可使用git config –global user."><meta property="og:type" content="article"><meta property="og:title" content="git生成ssh 公钥-windows"><meta property="og:url" content="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/index.html"><meta property="og:site_name" content="life is love"><meta property="og:description" content="首先可以查看是否已经有了config（当然有了也可以覆盖掉） 可以通过git config user.name  （email类似） 如过没有设置git config信息的话先设置用户名和邮箱，通过git config user.name “用户名”  和 git config user.email “邮箱” （以上设置的是局部信息，设置全局可使用git config –global user."><meta property="og:locale" content="zh_CN"><meta property="og:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"><meta property="og:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"><meta property="article:published_time" content="2019-02-21T14:05:02.000Z"><meta property="article:modified_time" content="2019-02-25T13:46:13.000Z"><meta property="article:author" content="Jayce"><meta property="article:tag" content="git"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"><link rel="canonical" href="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/"><script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/","path":"2019/02/21/generateSshKeyWithGit/","title":"git生成ssh 公钥-windows"}</script><script class="next-config" data-name="calendar" type="application/json">""</script><title>git生成ssh 公钥-windows | life is love</title><noscript><link rel="stylesheet" href="/css/noscript.css"></noscript></head><body itemscope itemtype="http://schema.org/WebPage" class="use-motion"><div class="headband"></div><main class="main"><div class="column"><header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container"><div class="site-nav-toggle"><div class="toggle" aria-label="切换导航栏" role="button"><span class="toggle-line"></span><span class="toggle-line"></span><span class="toggle-line"></span></div></div><div class="site-meta"><a href="/" class="brand" rel="start"><i class="logo-line"></i><p class="site-title">life is love</p><i class="logo-line"></i></a><p class="site-subtitle" itemprop="description">记录生活和学习</p></div><div class="site-nav-right"><div class="toggle popup-trigger" aria-label="搜索" role="button"></div></div></div><nav class="site-nav"><ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li></ul></nav></header><aside class="sidebar"><div class="sidebar-inner sidebar-overview-active"><ul class="sidebar-nav"><li class="sidebar-nav-toc"> 文章目录</li><li class="sidebar-nav-overview"> 站点概览</li></ul><div class="sidebar-panel-container"><div class="post-toc-wrap sidebar-panel"></div><div class="site-overview-wrap sidebar-panel"><div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" alt="Jayce" src="/images/icon.jpeg"><p class="site-author-name" itemprop="name">Jayce</p><div class="site-description" itemprop="description">Nothing is impossible, the word itself says I'm possible.</div></div><div class="site-state-wrap animated"><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">14</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/"><span class="site-state-item-count">6</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/"><span class="site-state-item-count">10</span> <span class="site-state-item-name">标签</span></a></div></nav></div><div class="links-of-author animated"><span class="links-of-author-item"><a href="mailto:dasnnj@outlook.com" title="E-Mail → mailto:dasnnj@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i> E-Mail</a></span></div></div></div></div></aside></div><div class="main-inner post posts-expand"><div class="post-block"><article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN"><link itemprop="mainEntityOfPage" href="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="image" content="/images/icon.jpeg"><meta itemprop="name" content="Jayce"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="life is love"><meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible."></span><span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork"><meta itemprop="name" content="git生成ssh 公钥-windows | life is love"><meta itemprop="description" content=""></span><header class="post-header"><h1 class="post-title" itemprop="name headline"> git生成ssh 公钥-windows</h1><div class="post-meta-container"><div class="post-meta"><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar"></i></span> <span class="post-meta-item-text">发表于</span> <time title="创建时间：2019-02-21 22:05:02" itemprop="dateCreated datePublished" datetime="2019-02-21T22:05:02+08:00">2019-02-21</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-calendar-check"></i></span> <span class="post-meta-item-text">更新于</span> <time title="修改时间：2019-02-25 21:46:13" itemprop="dateModified" datetime="2019-02-25T21:46:13+08:00">2019-02-25</time></span><span class="post-meta-item"><span class="post-meta-item-icon"><i class="far fa-folder"></i></span> <span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a></span></span></div></div></header><div class="post-body" itemprop="articleBody"><ul><li>首先可以查看是否已经有了config（当然有了也可以覆盖掉）</li><li>可以通过<code>git config user.name</code> （email类似）</li><li>如过没有设置git config信息的话先设置用户名和邮箱，通过<code>git config user.name “用户名”</code> 和 <code>git config user.email “邮箱”</code><br>（<strong>以上设置的是局部信息，设置全局可使用<code>git config –global user.name</code> ，eamil方式和name一样</strong>）<br>设置的信息将会体现在提交代码的提交人信息</li></ul><span id="more"></span><ul><li><p>可以通过<code>git config user.name</code> （email类似）查看设置好了没</p></li><li><p>之后通过<code>ssh-keygen -t rsa -C “邮箱”</code>生成，后面可以<strong>一路回车</strong>或者可以在输入加密密码的时候输入一下。具体信息可自行百度</p></li><li><p>生成的公钥存在<code>C:\Users\你的用户名\.ssh</code>里面的以 .pub 结尾的文件里面，随便以文本格式打开，复制下来分别复制到github,和dev.tencent</p></li><li><p>github部署公钥.png<br> <img src="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"></p></li><li><p>腾讯部署公钥<br><a target="_blank" rel="noopener" href="http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png&s"><img src="http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"></a></p></li></ul><p><strong>感谢:</strong> <a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/72103">https://yq.aliyun.com/articles/72103</a></p></div><footer class="post-footer"><div class="post-tags"> <a href="/tags/git/" rel="tag"># git</a></div><div class="post-nav"><div class="post-nav-item"><a href="/2019/01/26/hexo-DeployOn-github&tencent-coding/" rel="prev" title="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程"><i class="fa fa-chevron-left"></i> 将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程</a></div><div class="post-nav-item"> <a href="/2019/02/24/themeSettingsOfNexT/" rel="next" title="hexo之nexT主题优化配置">hexo之nexT主题优化配置<i class="fa fa-chevron-right"></i></a></div></div></footer></article></div></div></main><footer class="footer"><div class="footer-inner"><div class="copyright"> &copy; <span itemprop="copyrightYear">2023</span><span class="with-love"><i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">Jayce</span></div><div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动</div></div></footer><div class="toggle sidebar-toggle" role="button"><span class="toggle-line"></span><span class="toggle-line"></span><span class="toggle-line"></span></div><div class="sidebar-dimmer"></div><div class="back-to-top" role="button" aria-label="返回顶部"><i class="fa fa-arrow-up fa-lg"></i> <span>0%</span></div><div class="reading-progress-bar"></div><noscript><div class="noscript-warning">Theme NexT works best with JavaScript enabled</div></noscript><script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script><script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/icon.jpeg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/icon.jpeg">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/icon.jpeg">
+  <link rel="mask-icon" href="/icon.jpeg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.14.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="首先可以查看是否已经有了config（当然有了也可以覆盖掉） 可以通过git config user.name  （email类似） 如过没有设置git config信息的话先设置用户名和邮箱，通过git config user.name “用户名”  和 git config user.email “邮箱” （以上设置的是局部信息，设置全局可使用git config –global user.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git生成ssh 公钥-windows">
+<meta property="og:url" content="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/index.html">
+<meta property="og:site_name" content="life is love">
+<meta property="og:description" content="首先可以查看是否已经有了config（当然有了也可以覆盖掉） 可以通过git config user.name  （email类似） 如过没有设置git config信息的话先设置用户名和邮箱，通过git config user.name “用户名”  和 git config user.email “邮箱” （以上设置的是局部信息，设置全局可使用git config –global user.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png">
+<meta property="og:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png">
+<meta property="article:published_time" content="2019-02-21T14:05:02.000Z">
+<meta property="article:modified_time" content="2019-02-25T13:46:13.000Z">
+<meta property="article:author" content="Jayce">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png">
+
+
+<link rel="canonical" href="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/","path":"2019/02/21/generateSshKeyWithGit/","title":"git生成ssh 公钥-windows"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>git生成ssh 公钥-windows | life is love</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">life is love</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">记录生活和学习</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-schedule"><a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>日程表</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Jayce"
+      src="/images/icon.jpeg">
+  <p class="site-author-name" itemprop="name">Jayce</p>
+  <div class="site-description" itemprop="description">Nothing is impossible, the word itself says I'm possible.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="mailto:dasnnj@outlook.com" title="E-Mail → mailto:dasnnj@outlook.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dasnnj.github.io/2019/02/21/generateSshKeyWithGit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpeg">
+      <meta itemprop="name" content="Jayce">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="life is love">
+      <meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="git生成ssh 公钥-windows | life is love">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          git生成ssh 公钥-windows
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-02-21 22:05:02" itemprop="dateCreated datePublished" datetime="2019-02-21T22:05:02+08:00">2019-02-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2019-02-25 21:46:13" itemprop="dateModified" datetime="2019-02-25T21:46:13+08:00">2019-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/tool/" itemprop="url" rel="index"><span itemprop="name">tool</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <ul>
+<li>首先可以查看是否已经有了config（当然有了也可以覆盖掉）</li>
+<li>可以通过<code>git config user.name </code> （email类似）</li>
+<li>如过没有设置git config信息的话先设置用户名和邮箱，通过<code>git config user.name “用户名” </code> 和 <code>git config user.email “邮箱” </code><br>（<strong>以上设置的是局部信息，设置全局可使用<code>git config –global user.name </code> ，eamil方式和name一样</strong>）<br>设置的信息将会体现在提交代码的提交人信息</li>
+</ul>
+<span id="more"></span>
+
+<ul>
+<li><p>可以通过<code>git config user.name </code> （email类似）查看设置好了没</p>
+</li>
+<li><p>之后通过<code>ssh-keygen -t rsa -C “邮箱”</code>生成，后面可以<strong>一路回车</strong>或者可以在输入加密密码的时候输入一下。具体信息可自行百度</p>
+</li>
+<li><p>生成的公钥存在<code>C:\Users\你的用户名\.ssh</code>里面的以 .pub 结尾的文件里面，随便以文本格式打开，复制下来分别复制到github,和dev.tencent</p>
+</li>
+<li><p>github部署公钥.png<br> <img src="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"></p>
+</li>
+<li><p>腾讯部署公钥<br><a target="_blank" rel="noopener" href='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png&s'><img src='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png' /></a></p>
+</li>
+</ul>
+<p><strong>感谢:</strong> <a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/72103">https://yq.aliyun.com/articles/72103</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/26/hexo-DeployOn-github&tencent-coding/" rel="prev" title="将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程">
+                  <i class="fa fa-chevron-left"></i> 将Hexo同时部署在github和腾讯云开发者平台或Coding初级实践教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/02/24/themeSettingsOfNexT/" rel="next" title="hexo之nexT主题优化配置">
+                  hexo之nexT主题优化配置 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jayce</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
