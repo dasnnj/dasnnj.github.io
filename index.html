@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -157,6 +157,89 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://dasnnj.github.io/2024/01/20/Stream-toList%E5%92%8CCollectors-toList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/icon.jpeg">
+      <meta itemprop="name" content="Jayce">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="life is love">
+      <meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | life is love">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/01/20/Stream-toList%E5%92%8CCollectors-toList/" class="post-title-link" itemprop="url">Stream.toList不能滥用以及与Collectors.toList的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2024-01-20 20:01:20 / 修改时间：21:52:20" itemprop="dateCreated datePublished" datetime="2024-01-20T20:01:20+08:00">2024-01-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Stream <code>toList()</code>返回的是只读List原则上不可修改，<code>collect(Collectors.toList())</code>默认返回的是ArrayList,可以增删改查</strong>  </p>
+<h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>在公司看到开发环境突然发现了<code>UnsupportedOperationException</code> 报错，想到了不是自己throw的应该就是操作collection不当。<br>发现的确是同事使用了类似<code>stringList.stream().filter(number -&gt; Long.parseLong(number) &gt; 1).toList()</code> 以stream.toList()作为返回， 后继续使用了返回值做add操作，导致报错</p>
+<h2 id="2-Stream-toList-和-collect-Collectors-toList-的区别"><a href="#2-Stream-toList-和-collect-Collectors-toList-的区别" class="headerlink" title="2. Stream toList()和 collect(Collectors.toList())的区别"></a>2. Stream <code>toList()</code>和 <code>collect(Collectors.toList())</code>的区别</h2><blockquote>
+<p>JDK version: 21</p>
+<p>IDE: IDEA</p>
+</blockquote>
+<p><strong>从Java16开始，Stream有了直接<code>toList</code>方法</strong>， java8时候常用的方法是<code> stringList.stream().filter(number -&gt; Long.parseLong(number) &gt; 1).collect(Collectors.toList())</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/01/20/Stream-toList%E5%92%8CCollectors-toList/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -962,96 +1045,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/04/19/svn-update-error/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://dasnnj.github.io/2019/04/06/grouping-query-in-oracle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/icon.jpeg">
-      <meta itemprop="name" content="Jayce">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="life is love">
-      <meta itemprop="description" content="Nothing is impossible, the word itself says I'm possible.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | life is love">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/04/06/grouping-query-in-oracle/" class="post-title-link" itemprop="url">Oracle分组查询</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2019-04-06 11:15:13 / 修改时间：11:22:01" itemprop="dateCreated datePublished" datetime="2019-04-06T11:15:13+08:00">2019-04-06</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java/Oracle/" itemprop="url" rel="index"><span itemprop="name">Oracle</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="分组查询，且只取每一组内的一条最新的记录"><a href="#分组查询，且只取每一组内的一条最新的记录" class="headerlink" title="分组查询，且只取每一组内的一条最新的记录"></a>分组查询，且只取每一组内的一条最新的记录</h3><h5 id="需求：查询-code-为a，b，c且在有效时间段内的每个code最新的一条记录（code不是主键）"><a href="#需求：查询-code-为a，b，c且在有效时间段内的每个code最新的一条记录（code不是主键）" class="headerlink" title="需求：查询 code 为a，b，c且在有效时间段内的每个code最新的一条记录（code不是主键）"></a>需求：查询 code 为a，b，c且在有效时间段内的每个code最新的一条记录（code不是主键）</h5><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> (<span class="keyword">select</span> code</span><br><span class="line">    col1,</span><br><span class="line">    col2,</span><br><span class="line">    <span class="built_in">row_number</span>() <span class="keyword">over</span> (<span class="keyword">partition</span> <span class="keyword">by</span> code <span class="keyword">order</span> <span class="keyword">by</span> <span class="type">time</span> <span class="keyword">desc</span>) rank</span><br><span class="line">    <span class="keyword">from</span> t_order</span><br><span class="line">    <span class="keyword">where</span> type<span class="operator">=</span> <span class="string">&#x27;107&#x27;</span></span><br><span class="line">    <span class="keyword">and</span> to_char(sysdate, <span class="string">&#x27;yyyymmdd-hh24:mi:ss&#x27;</span>) <span class="operator">&amp;</span>lt;<span class="operator">=</span> validuntilTime</span><br><span class="line">        <span class="keyword">and</span> code <span class="keyword">in</span></span><br><span class="line">    (<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>)</span><br><span class="line">    ) <span class="keyword">where</span> rank <span class="operator">=</span> <span class="number">1</span></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/04/06/grouping-query-in-oracle/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
