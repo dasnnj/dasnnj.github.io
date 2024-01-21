@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="首先可以查看是否已经有了config（当然有了也可以覆盖掉） 可以通过git config user.name  （email类似） 如过没有设置git config信息的话先设置用户名和邮箱，通过git config user.name “用户名”  和 git config user.email “邮箱” （以上设置的是局部信息，设置全局可使用git config –global user.">
 <meta property="og:type" content="article">
@@ -245,9 +245,9 @@
 </li>
 <li><p>生成的公钥存在<code>C:\Users\你的用户名\.ssh</code>里面的以 .pub 结尾的文件里面，随便以文本格式打开，复制下来分别复制到github,和dev.tencent</p>
 </li>
-<li><p>github部署公钥.png<br> <img src="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"></p>
+<li><p>github部署公钥.png<br> <img data-src="http://oneshare.dasnnj.cn/?/images/2019/02/21/github%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png"></p>
 </li>
-<li><p>腾讯部署公钥<br><a target="_blank" rel="noopener" href='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png&s'><img src='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png' /></a></p>
+<li><p>腾讯部署公钥<br><a target="_blank" rel="noopener" href='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png&s'><img data-src='http://oneshare.dasnnj.cn/?/images/2019/02/21/%E8%85%BE%E8%AE%AF%E9%83%A8%E7%BD%B2%E5%85%AC%E9%92%A5.png' /></a></p>
 </li>
 </ul>
 <p><strong>感谢:</strong> <a target="_blank" rel="noopener" href="https://yq.aliyun.com/articles/72103">https://yq.aliyun.com/articles/72103</a></p>
@@ -259,8 +259,22 @@
     
 
     <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Jayce 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
           <div class="post-tags">
-              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/git/" rel="tag"><i class="fa fa-tag"></i> git</a>
           </div>
 
         
@@ -320,6 +334,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   

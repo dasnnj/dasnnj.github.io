@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Stream toList()返回的是只读List原则上不可修改，collect(Collectors.toList())默认返回的是ArrayList,可以增删改查   1. 背景在公司看到开发环境突然发现了UnsupportedOperationException 报错，想到了不是自己throw的应该就是操作collection不当。发现的确是同事使用了类似stringList.stream(">
 <meta property="og:type" content="article">
@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Stream-toList-%E5%92%8C-collect-Collectors-toList-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.</span> <span class="nav-text">2. Stream toList()和 collect(Collectors.toList())的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-toList"><span class="nav-number">2.1.</span> <span class="nav-text">Stream toList()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-collect-Collectors-toList"><span class="nav-number">2.2.</span> <span class="nav-text">Stream collect(Collectors.toList())</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-%E4%B8%8D%E8%80%83%E8%99%91%E6%80%A7%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">3.如何使用(不考虑性能)</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%83%8C%E6%99%AF"><span class="nav-text">1. 背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Stream-toList-%E5%92%8C-collect-Collectors-toList-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-text">2. Stream toList()和 collect(Collectors.toList())的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-toList"><span class="nav-text">Stream toList()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stream-collect-Collectors-toList"><span class="nav-text">Stream collect(Collectors.toList())</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-%E4%B8%8D%E8%80%83%E8%99%91%E6%80%A7%E8%83%BD"><span class="nav-text">3.如何使用(不考虑性能)</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +245,7 @@
 
 <p>查看源码 Stream toList调用的是<code>Collections.unmodifiableList</code> 而在<code>unmodifiableList(List&lt;? extends T&gt; list)</code>实现中，<strong>都会返回一个不可修改的List</strong>，所以<strong>不能使用set&#x2F;add&#x2F;remove等改变list数组的方法</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> (list <span class="keyword">instanceof</span> RandomAccess ?</span><br><span class="line">               <span class="keyword">new</span> <span class="title class_">UnmodifiableRandomAccessList</span>&lt;&gt;(list) :</span><br><span class="line">               <span class="keyword">new</span> <span class="title class_">UnmodifiableList</span>&lt;&gt;(list));</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/dasnnj/imagesbed/master/images/2024/20240120204847.png"></p>
+<p><img data-src="https://raw.githubusercontent.com/dasnnj/imagesbed/master/images/2024/20240120204847.png"></p>
 <hr>
 <p><strong>但其实也可以修改List的元素的某些属性，例如</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">        List&lt;String&gt; stringList = List.of(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="string">&quot;3&quot;</span>);</span><br><span class="line">        List&lt;String&gt; largeNumberList = stringList.stream().filter(number -&gt; Long.parseLong(number) &gt; <span class="number">1</span>).toList();</span><br><span class="line">        List&lt;String&gt; largeNumberList2 = stringList.stream().filter(number -&gt; Long.parseLong(number) &gt; <span class="number">1</span>).collect(Collectors.toList());</span><br><span class="line"><span class="comment">//        largeNumberList.add(&quot;4&quot;); //  java.lang.UnsupportedOperationException</span></span><br><span class="line">        largeNumberList2.add(<span class="string">&quot;4&quot;</span>); <span class="comment">//success</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// modify custom object attribute</span></span><br><span class="line">        <span class="type">User</span> <span class="variable">userZhang</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;ZhangSan&quot;</span>);</span><br><span class="line">        <span class="type">User</span> <span class="variable">userLi</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">User</span>(<span class="string">&quot;LiSi&quot;</span>);</span><br><span class="line">        List&lt;User&gt; userList = List.of(userZhang, userLi);</span><br><span class="line">        List&lt;User&gt; filterList = userList.stream().filter(user -&gt; <span class="string">&quot;LiSi&quot;</span>.equals(user.name)).toList();</span><br><span class="line"></span><br><span class="line">        <span class="type">User</span> <span class="variable">first</span> <span class="operator">=</span> filterList.getFirst();<span class="comment">//java 21</span></span><br><span class="line">        first.name = <span class="string">&quot;WangWu&quot;</span>;</span><br><span class="line">        filterList.forEach(u -&gt; System.out.println(u.name));</span><br><span class="line">        <span class="comment">//List.of返回的也是不能修改的List</span></span><br><span class="line">        userList.forEach(u -&gt; System.out.print(u.name));</span><br></pre></td></tr></table></figure>
@@ -268,9 +268,23 @@
     
 
     <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Jayce 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
           <div class="post-tags">
-              <a href="/tags/java/" rel="tag"># java</a>
-              <a href="/tags/List/" rel="tag"># List</a>
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+              <a href="/tags/List/" rel="tag"><i class="fa fa-tag"></i> List</a>
           </div>
 
         
@@ -327,6 +341,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   

@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="基于java做一个socket.io客户端前言最近公司这边让我去订阅一个第三方机构的websocket server，也是头疼，免不了和对方各种沟通，大家都很忙，收到回复很慢，开发方向也不知道。先是做了一个普通websocket的客户端，但后面了解到对方是基于socket.io做的一个server，又重新做了一个基于socket.io-client-java开源库的客户端。涉及到公司商业机密，所以">
 <meta property="og:type" content="article">
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Ejava%E5%81%9A%E4%B8%80%E4%B8%AAsocket-io%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">1.</span> <span class="nav-text">基于java做一个socket.io客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Client-Socket-IO-Client-Library-for-Java"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. Client(Socket.IO Client Library for Java)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">流程：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Server-Socket-IO%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%BC%80%E6%BA%90Java%E5%AE%9E%E7%8E%B0%E3%80%82%E5%9F%BA%E4%BA%8ENetty%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6%E3%80%82"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. Server(Socket.IO服务器的开源Java实现。基于Netty服务器框架。)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-pom-xml"><span class="nav-number">1.1.3.</span> <span class="nav-text">3. pom.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%86%8D%E6%AC%A1%E6%84%9F%E8%B0%A2"><span class="nav-number">1.1.4.</span> <span class="nav-text">4. 再次感谢</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8Ejava%E5%81%9A%E4%B8%80%E4%B8%AAsocket-io%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">基于java做一个socket.io客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-Client-Socket-IO-Client-Library-for-Java"><span class="nav-text">1. Client(Socket.IO Client Library for Java)</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="nav-text">流程：</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-Server-Socket-IO%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%BC%80%E6%BA%90Java%E5%AE%9E%E7%8E%B0%E3%80%82%E5%9F%BA%E4%BA%8ENetty%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A1%86%E6%9E%B6%E3%80%82"><span class="nav-text">2. Server(Socket.IO服务器的开源Java实现。基于Netty服务器框架。)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-pom-xml"><span class="nav-text">3. pom.xml</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-%E5%86%8D%E6%AC%A1%E6%84%9F%E8%B0%A2"><span class="nav-text">4. 再次感谢</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -241,7 +241,7 @@
 <li>启动client会创建scoket,并将uri,options等参数set进去</li>
 <li>监听一些事件（可自定义），也就是将event为key，回调为value，put 进callbacks(其为ConcurrentMap)</li>
 </ol>
-<p><img src="/images/2019/04/27/e32d9ac0-68ef-11e9-ab94-61fbeea92c8b.png" alt="image.png"></p>
+<p><img data-src="/images/2019/04/27/e32d9ac0-68ef-11e9-ab94-61fbeea92c8b.png" alt="image.png"></p>
 <ol start="3">
 <li>connect 主动连接</li>
 <li>当连接成功时候会触发<code>Socket.EVENT_CONNECT</code>事件，执行了<code>socket.emit(&quot;sub&quot;, &quot;我是訂閲對象&quot;);</code>订阅操作</li>
@@ -259,8 +259,22 @@
     
 
     <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Jayce 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
           <div class="post-tags">
-              <a href="/tags/websocket/" rel="tag"># websocket</a>
+              <a href="/tags/websocket/" rel="tag"><i class="fa fa-tag"></i> websocket</a>
           </div>
 
         
@@ -320,6 +334,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   

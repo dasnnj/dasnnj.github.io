@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha256-yIDrPSXHZdOZhAqiBP7CKzIwMQmRCJ8UeB8Jo17YC4o=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"dasnnj.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.19.1","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12},"copycode":{"enable":"default","style":null},"fold":{"enable":true,"height":800},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Mybatis增删改查之Oracle写在前面的话Mybatis的话一年没接触过了，这块有几个point需要注意：  返回对象resultMap的映射，以及resultMap嵌套（嵌套查询） jdbcType的参照，含义，用法 新增返回主键 批量新增，遇到指定字段重复则更新  没完成的是：批量新增返回主键List">
 <meta property="og:type" content="article">
@@ -115,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E4%B9%8BOracle"><span class="nav-number">1.</span> <span class="nav-text">Mybatis增删改查之Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%E7%9A%84%E8%AF%9D"><span class="nav-number">1.0.1.</span> <span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80-%E6%9F%A5%E8%AF%A2"><span class="nav-number">1.0.2.</span> <span class="nav-text">一. 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C-%E6%96%B0%E5%A2%9E"><span class="nav-number">1.0.3.</span> <span class="nav-text">二. 新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89-%E4%BF%AE%E6%94%B9"><span class="nav-number">1.0.4.</span> <span class="nav-text">三. 修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9B-%E5%88%A0%E9%99%A4"><span class="nav-number">1.0.5.</span> <span class="nav-text">四. 删除</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mybatis%E5%A2%9E%E5%88%A0%E6%94%B9%E6%9F%A5%E4%B9%8BOracle"><span class="nav-text">Mybatis增删改查之Oracle</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2%E7%9A%84%E8%AF%9D"><span class="nav-text">写在前面的话</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80-%E6%9F%A5%E8%AF%A2"><span class="nav-text">一. 查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C-%E6%96%B0%E5%A2%9E"><span class="nav-text">二. 新增</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%89-%E4%BF%AE%E6%94%B9"><span class="nav-text">三. 修改</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%9B%9B-%E5%88%A0%E9%99%A4"><span class="nav-text">四. 删除</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -316,9 +316,23 @@
     
 
     <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.png" alt="Jayce 微信">
+        <span>微信</span>
+      </div>
+
+  </div>
+</div>
+
           <div class="post-tags">
-              <a href="/tags/mybatis/" rel="tag"># mybatis</a>
-              <a href="/tags/oracle/" rel="tag"># oracle</a>
+              <a href="/tags/mybatis/" rel="tag"><i class="fa fa-tag"></i> mybatis</a>
+              <a href="/tags/oracle/" rel="tag"><i class="fa fa-tag"></i> oracle</a>
           </div>
 
         
@@ -378,6 +392,7 @@
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
