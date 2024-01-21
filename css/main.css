@@ -2679,7 +2679,10 @@ header.header {
   }
 }
 code {
+  color: #c7254e;
   overflow-wrap: break-word;
-  background: #f9f2f4;
-  border-radius: 5px;
+  border-radius: 3px;
+}
+blockquote {
+  color: #3d6a85;
 }
